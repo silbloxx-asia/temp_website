@@ -84,16 +84,22 @@ function openModal(jobId) {
   const modalContent = document.getElementById('modal-content');
   const overlay      = document.getElementById('modal-overlay');
   if (!modalContent || !overlay) return;
+  const formattedDesc = desc
+    .replace(/^(Key responsibilities:|Profile:|Trách nhiệm chính:|Yêu cầu:)$/gm, '<strong>$1</strong>');
+
   modalContent.innerHTML = `
     <div class="modal-header">
-      <h2>${title}</h2>
-      <div class="modal-meta">
-        <span>📍 ${job.location}</span>
-        <span>🕐 ${type}</span>
+      <div class="modal-header-text">
+        <h2>${title}</h2>
+        <div class="modal-meta">
+          <span>📍 ${job.location}</span>
+          <span>🕐 ${type}</span>
+        </div>
       </div>
+      <button class="modal-close" id="modal-close" aria-label="Close">×</button>
     </div>
     <div class="modal-body">
-      <div class="modal-desc">${desc.replace(/\n/g, '<br>')}</div>
+      <div class="modal-desc">${formattedDesc.replace(/\n/g, '<br>')}</div>
     </div>
     <div class="modal-footer">
       <a href="${buildApplyLink(job)}" class="btn btn-apply">
@@ -104,7 +110,11 @@ function openModal(jobId) {
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  document.getElementById('modal-close').focus();
+  const closeBtn = document.getElementById('modal-close');
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+    closeBtn.focus();
+  }
 }
 
 function closeModal() {
@@ -191,9 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Modal close handlers ─────────────────
-  const modalClose = document.getElementById('modal-close');
-  const overlay    = document.getElementById('modal-overlay');
-  if (modalClose) modalClose.addEventListener('click', closeModal);
   if (overlay)    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 

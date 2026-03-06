@@ -672,9 +672,8 @@ address a:hover { color: var(--red); text-decoration: underline; }
   min-height: 0;
 }
 .modal-close {
-  position: absolute;
-  top: 16px;
-  right: 20px;
+  flex-shrink: 0;
+  align-self: flex-start;
   font-size: 1.8rem;
   background: none;
   border: none;
@@ -682,13 +681,20 @@ address a:hover { color: var(--red); text-decoration: underline; }
   color: var(--text-light);
   line-height: 1;
   transition: color var(--transition);
-  z-index: 1;
+  margin-top: 4px;
 }
 .modal-close:hover { color: var(--text); }
 .modal-header {
   padding: 48px 48px 24px;
   border-bottom: 1px solid #ebebeb;
   flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+.modal-header-text {
+  flex: 1;
+  min-width: 0;
 }
 .modal-body {
   overflow-y: auto;
@@ -700,6 +706,8 @@ address a:hover { color: var(--red); text-decoration: underline; }
   border-top: 1px solid #ebebeb;
   flex-shrink: 0;
   background: var(--white);
+  display: flex;
+  justify-content: flex-end;
 }
 #modal-content h2 {
   font-family: var(--font-heading);
@@ -709,7 +717,6 @@ address a:hover { color: var(--red); text-decoration: underline; }
   color: var(--black);
   margin-bottom: 12px;
   letter-spacing: -0.02em;
-  padding-right: 32px;
 }
 #modal-content .modal-meta {
   font-size: 0.85rem;
