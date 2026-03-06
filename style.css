@@ -9,15 +9,14 @@
 
 :root {
   --red:        #FF2E00;
-  --black:      #0D0D0D;
-  --dark:       #1A1A1A;
-  --mid:        #2D2D2D;
-  --text:       #1A1A1A;
-  --text-light: #555555;
+  --black:      #2d3033;
+  --dark:       #2d3033;
+  --mid:        #3d4043;
+  --text:       #2d3033;
+  --text-light: #636970;
   --white:      #FFFFFF;
   --off-white:  #F5F5F3;
   --footer-bg:  #F0F0EE;
-  --footer-bottom-bg: #1A1A1A;
   --link-red:   #CC2500;
 
   --font-heading: 'Inter', sans-serif;
@@ -27,7 +26,7 @@
   --container:  1200px;
   --pad-section: 96px;
   --pad-mobile:  48px;
-  --radius:      0px;
+  --radius:      0.25rem;
   --transition:  0.2s ease;
 }
 
@@ -67,11 +66,10 @@ address a:hover { color: var(--red); text-decoration: underline; }
   position: relative;
   font-family: var(--font-mono);
   font-weight: 400;
-  font-size: 0.75rem;
-  line-height: 0.9375rem;
+  font-size: 0.625rem;
+  line-height: 0.78125rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  /* Large left padding to make room for the bullet */
   padding: 0.8em 0.8em 0.8em clamp(2.5rem, 1.5rem + 4vw, 4rem);
   border: none;
   border-radius: 0.25rem;
@@ -86,12 +84,11 @@ address a:hover { color: var(--red); text-decoration: underline; }
   display: block;
   position: absolute;
   left: 0.8em;
-  top: 0.8em;
-  bottom: 0.8em;
+  top: 0.7em;
   color: inherit;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  line-height: 0.9375rem;
+  font-size: 0.625rem;
+  line-height: 0.78125rem;
   pointer-events: none;
 }
 .btn-primary {
@@ -109,14 +106,12 @@ address a:hover { color: var(--red); text-decoration: underline; }
   justify-content: center;
 }
 .btn-social:hover {
-  background: #333;
+  background: var(--mid);
   color: var(--white);
 }
 .btn-apply {
   background: var(--red);
   color: var(--white);
-  font-size: 0.7rem;
-  padding: 0.7em 0.8em 0.7em clamp(2.2rem, 1.4rem + 3vw, 3.5rem);
 }
 .btn-apply:hover {
   background: var(--link-red);
@@ -201,14 +196,19 @@ address a:hover { color: var(--red); text-decoration: underline; }
   padding: 6px 2px;
   transition: color var(--transition);
   white-space: nowrap;
+  line-height: 1;
+  vertical-align: middle;
 }
 .lang-current:hover { color: var(--red); }
 .lang-globe {
   flex-shrink: 0;
   display: block;
+  position: relative;
+  top: 0;
 }
 .lang-chevron {
   flex-shrink: 0;
+  display: block;
   transition: transform 0.2s ease;
 }
 .lang-dropdown.open .lang-chevron {
@@ -327,11 +327,10 @@ address a:hover { color: var(--red); text-decoration: underline; }
 .hero-headline h1 {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-  line-height: 1.05;
-  text-transform: uppercase;
+  font-size: clamp(2rem, 1.4718309859rem + 2.2535211268vw, 3.5rem);
+  line-height: 1.08;
   color: var(--black);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 .hero-content {
   padding-top: 8px;
@@ -372,10 +371,9 @@ address a:hover { color: var(--red); text-decoration: underline; }
 .solutions-content h2 {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  text-transform: uppercase;
-  line-height: 1.05;
-  letter-spacing: -0.01em;
+  font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--black);
   margin-bottom: 24px;
 }
@@ -430,11 +428,10 @@ address a:hover { color: var(--red); text-decoration: underline; }
 .team-headline h2 {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: clamp(2.8rem, 5vw, 4.5rem);
-  text-transform: uppercase;
-  line-height: 1;
+  font-size: clamp(2rem, 1.4718309859rem + 2.2535211268vw, 3.5rem);
+  line-height: 1.08;
   color: var(--white);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
 }
 .team-reasons {
   background: var(--white);
@@ -443,11 +440,10 @@ address a:hover { color: var(--red); text-decoration: underline; }
 .team-reasons h3 {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 1.4rem;
-  text-transform: uppercase;
+  font-size: 1.1rem;
   color: var(--black);
   margin-bottom: 24px;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.01em;
 }
 .reason {
   margin-bottom: 20px;
@@ -582,7 +578,7 @@ address a:hover { color: var(--red); text-decoration: underline; }
 }
 .footer-bottom p a:hover { color: var(--red); }
 
-/* FIX 7: BRIAM logo in footer */
+/* BRIAM logo in footer */
 .briam-logo {
   display: flex;
   align-items: center;
@@ -598,10 +594,10 @@ address a:hover { color: var(--red); text-decoration: underline; }
   letter-spacing: 0.03em;
 }
 .briam-img {
-  height: 14px;
+  aspect-ratio: 62 / 20;
+  height: 1.25rem;
   width: auto;
   display: block;
-  /* Dark logo on light grey background — no filter needed */
 }
 
 @media (max-width: 900px) {
@@ -663,10 +659,10 @@ address a:hover { color: var(--red); text-decoration: underline; }
 #modal-content h2 {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: 1.8rem;
-  text-transform: uppercase;
+  font-size: 1.6rem;
   color: var(--black);
   margin-bottom: 6px;
+  letter-spacing: -0.02em;
 }
 #modal-content .modal-meta {
   font-size: 0.85rem;
