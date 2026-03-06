@@ -20,8 +20,9 @@
   --footer-bottom-bg: #1A1A1A;
   --link-red:   #CC2500;
 
-  --font-heading: 'Barlow Condensed', sans-serif;
+  --font-heading: 'Inter', sans-serif;
   --font-body:    'Barlow', sans-serif;
+  --font-mono:    'IBM Plex Mono', monospace;
 
   --container:  1200px;
   --pad-section: 96px;
@@ -58,33 +59,40 @@ address a:hover { color: var(--red); text-decoration: underline; }
   .container { padding: 0 20px; }
 }
 
-/* ── BUTTONS (SCE style) ──────────────────── */
+/* ── BUTTONS (SCE style — mono font + bullet) ── */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 0.82rem;
-  letter-spacing: 0.1em;
+  justify-content: flex-end;
+  position: relative;
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  padding: 13px 24px;
+  /* Large left padding to make room for the bullet */
+  padding: 0.8em 0.8em 0.8em clamp(2.5rem, 1.5rem + 4vw, 4rem);
   border: none;
+  border-radius: 0.25rem;
   cursor: pointer;
   text-decoration: none !important;
   transition: background var(--transition), color var(--transition), opacity var(--transition);
-  border-radius: var(--radius);
-  line-height: 1;
   white-space: nowrap;
 }
-/* Arrow on primary buttons */
-.btn-primary::after {
-  content: '→';
-  font-size: 0.9em;
-  transition: transform var(--transition);
-}
-.btn-primary:hover::after {
-  transform: translateX(3px);
+/* Bullet on the left — exact SCE pattern */
+.btn::before {
+  content: "•";
+  display: block;
+  position: absolute;
+  left: 0.8em;
+  top: 0.8em;
+  bottom: 0.8em;
+  color: inherit;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 0.9375rem;
+  pointer-events: none;
 }
 .btn-primary {
   background: var(--red);
@@ -107,13 +115,8 @@ address a:hover { color: var(--red); text-decoration: underline; }
 .btn-apply {
   background: var(--red);
   color: var(--white);
-  font-size: 0.78rem;
-  padding: 11px 20px;
-  white-space: nowrap;
-}
-.btn-apply::after {
-  content: '→';
-  font-size: 0.9em;
+  font-size: 0.7rem;
+  padding: 0.7em 0.8em 0.7em clamp(2.2rem, 1.4rem + 3vw, 3.5rem);
 }
 .btn-apply:hover {
   background: var(--link-red);
@@ -200,6 +203,10 @@ address a:hover { color: var(--red); text-decoration: underline; }
   white-space: nowrap;
 }
 .lang-current:hover { color: var(--red); }
+.lang-globe {
+  flex-shrink: 0;
+  display: block;
+}
 .lang-chevron {
   flex-shrink: 0;
   transition: transform 0.2s ease;
@@ -319,7 +326,7 @@ address a:hover { color: var(--red); text-decoration: underline; }
 }
 .hero-headline h1 {
   font-family: var(--font-heading);
-  font-weight: 800;
+  font-weight: 600;
   font-size: clamp(2.4rem, 4.5vw, 3.8rem);
   line-height: 1.05;
   text-transform: uppercase;
@@ -364,7 +371,7 @@ address a:hover { color: var(--red); text-decoration: underline; }
 }
 .solutions-content h2 {
   font-family: var(--font-heading);
-  font-weight: 800;
+  font-weight: 600;
   font-size: clamp(2rem, 3.5vw, 3rem);
   text-transform: uppercase;
   line-height: 1.05;
@@ -422,7 +429,7 @@ address a:hover { color: var(--red); text-decoration: underline; }
 }
 .team-headline h2 {
   font-family: var(--font-heading);
-  font-weight: 800;
+  font-weight: 600;
   font-size: clamp(2.8rem, 5vw, 4.5rem);
   text-transform: uppercase;
   line-height: 1;
@@ -435,7 +442,7 @@ address a:hover { color: var(--red); text-decoration: underline; }
 }
 .team-reasons h3 {
   font-family: var(--font-heading);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.4rem;
   text-transform: uppercase;
   color: var(--black);
@@ -554,10 +561,10 @@ address a:hover { color: var(--red); text-decoration: underline; }
   padding-top: 52px;
 }
 
-/* Footer bottom bar (FIX 4 + FIX 6 + FIX 7) */
+/* Footer bottom bar (same grey as footer) */
 .footer-bottom {
-  background: var(--footer-bottom-bg);
-  border-top: none;
+  background: var(--footer-bg);
+  border-top: 1px solid #e0e0de;
   padding: 16px 0;
 }
 .footer-bottom-inner {
@@ -567,13 +574,13 @@ address a:hover { color: var(--red); text-decoration: underline; }
 }
 .footer-bottom p {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.5);
+  color: var(--text-light);
 }
 .footer-bottom p a {
-  color: rgba(255,255,255,0.5);
+  color: var(--text-light);
   font-size: 0.8rem;
 }
-.footer-bottom p a:hover { color: var(--white); }
+.footer-bottom p a:hover { color: var(--red); }
 
 /* FIX 7: BRIAM logo in footer */
 .briam-logo {
@@ -582,24 +589,19 @@ address a:hover { color: var(--red); text-decoration: underline; }
   gap: 6px;
   text-decoration: none !important;
 }
-.briam-logo:hover { opacity: 0.8; }
+.briam-logo:hover { opacity: 0.7; }
 .briam-label {
   font-size: 0.78rem;
   font-weight: 400;
-  color: rgba(255,255,255,0.5);
+  color: var(--text-light);
   white-space: nowrap;
   letter-spacing: 0.03em;
 }
-.briam-wordmark {
-  /* SVG text wordmark – replace with real img tag when you have the file */
-  display: block;
-}
 .briam-img {
-  /* For when you swap in the real logo image: */
   height: 14px;
   width: auto;
   display: block;
-  filter: brightness(0) invert(1);  /* Make logo white on dark bg */
+  /* Dark logo on light grey background — no filter needed */
 }
 
 @media (max-width: 900px) {
@@ -660,7 +662,7 @@ address a:hover { color: var(--red); text-decoration: underline; }
 .modal-close:hover { color: var(--text); }
 #modal-content h2 {
   font-family: var(--font-heading);
-  font-weight: 800;
+  font-weight: 600;
   font-size: 1.8rem;
   text-transform: uppercase;
   color: var(--black);
