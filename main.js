@@ -46,14 +46,14 @@ function renderJobs(jobs) {
       </div>`;
     return;
   }
-  bar.innerHTML = jobs.map(job => `
-    <div class="job-row" onclick="openModal(${job.id})">
+  bar.innerHTML = jobs.map((job, index) => `
+    <div class="job-row" onclick="openModal(${index})">
       <span class="job-title">
         ${currentLang === 'vi' ? job.title_vi : job.title_en}
         <span class="job-location">(${job.location})</span>
       </span>
       <div style="display:flex;gap:10px;align-items:center">
-        <button class="btn btn-apply" onclick="event.stopPropagation(); openModal(${job.id})">
+        <button class="btn btn-apply" onclick="event.stopPropagation(); openModal(${index})">
           ${currentLang === 'vi' ? 'Chi tiết công việc' : 'Job Details'}
         </button>
       </div>
@@ -75,8 +75,8 @@ async function loadJobs() {
 }
 
 // global so inline onclick="openModal(id)" works
-function openModal(jobId) {
-  const job = (window.__jobs || []).find(j => j.id === jobId);
+function openModal(jobIndex) {
+  const job = (window.__jobs || [])[jobIndex];
   if (!job) return;
   const title        = currentLang === 'vi' ? job.title_vi   : job.title_en;
   const desc         = currentLang === 'vi' ? job.description_vi : job.description_en;
@@ -110,7 +110,7 @@ function openModal(jobId) {
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-  const closeBtn = document.getElementById('modal-close');
+  const closeBtn = modalContent.querySelector('.modal-close');
   if (closeBtn) {
     closeBtn.addEventListener('click', closeModal);
     closeBtn.focus();
