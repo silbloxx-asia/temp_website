@@ -201,6 +201,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── Modal close handlers ─────────────────
+  const overlay = document.getElementById('modal-overlay');
   if (overlay)    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
