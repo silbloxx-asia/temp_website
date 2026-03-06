@@ -85,15 +85,21 @@ function openModal(jobId) {
   const overlay      = document.getElementById('modal-overlay');
   if (!modalContent || !overlay) return;
   modalContent.innerHTML = `
-    <h2>${title}</h2>
-    <div class="modal-meta">
-      <span>📍 ${job.location}</span>
-      <span>🕐 ${type}</span>
+    <div class="modal-header">
+      <h2>${title}</h2>
+      <div class="modal-meta">
+        <span>📍 ${job.location}</span>
+        <span>🕐 ${type}</span>
+      </div>
     </div>
-    <div class="modal-desc">${desc.replace(/\n/g, '<br>')}</div>
-    <a href="${buildApplyLink(job)}" class="btn btn-apply">
-      ${currentLang === 'vi' ? 'Ứng tuyển ngay' : 'Apply Now'}
-    </a>
+    <div class="modal-body">
+      <div class="modal-desc">${desc.replace(/\n/g, '<br>')}</div>
+    </div>
+    <div class="modal-footer">
+      <a href="${buildApplyLink(job)}" class="btn btn-apply">
+        ${currentLang === 'vi' ? 'Ứng tuyển ngay' : 'Apply Now'}
+      </a>
+    </div>
   `;
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
