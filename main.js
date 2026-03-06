@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════
    SILBLOXX ASIA — main.js
-   - Language toggle (EN / VI)
+   - Language toggle (EN / VI) — SCE-style dropdown
    - Dynamic job listings from jobs.json
    - Job detail modal
 ═══════════════════════════════════════════ */
@@ -8,19 +8,42 @@
 const APPLY_TO = 'sebastiaan.weyler@silbloxx.com';
 const APPLY_CC = 'bertrand.vanmeenen@briamgroup.com';
 
+// Language labels shown in the dropdown button
+const LANG_LABELS = {
+  en: 'English',
+  vi: 'Tiếng Việt'
+};
+
+// The option shown in the dropdown menu (the OTHER language)
+const LANG_OTHER = {
+  en: { lang: 'vi', label: 'Tiếng Việt' },
+  vi: { lang: 'en', label: 'English' }
+};
+
 // ── Current language state ─────────────────
 let currentLang = localStorage.getItem('sbx-lang') || 'en';
 
-// ── Language toggle ────────────────────────
+// ── Language toggle (SCE-style dropdown) ───
+const langDropdown = document.getElementById('lang-dropdown');
+const langCurrent  = document.getElementById('lang-current');
+const langLabel    = document.getElementById('lang-label');
+const langMenu     = document.getElementById('lang-menu');
+
 function setLanguage(lang) {
   currentLang = lang;
   localStorage.setItem('sbx-lang', lang);
 
-  // Toggle active button
-  document.querySelectorAll('.lang-btn').forEach(btn => {
-    const isActive = btn.dataset.lang === lang;
-    btn.classList.toggle('active', isActive);
-    btn.setAttribute('aria-pressed', isActive);
+  // Update button label to current language
+  langLabel.textContent = LANG_LABELS[lang];
+
+  // Update dropdown option to the OTHER language
+  const other = LANG_OTHER[lang];
+  langMenu.innerHTML = `<li><button class="lang-option" data-lang="${other.lang}" role="option">${other.label}</button></li>`;
+
+  // Re-attach click handler for the new option
+  langMenu.querySelector('.lang-option').addEventListener('click', (e) => {
+    setLanguage(e.currentTarget.dataset.lang);
+    closeDropdown();
   });
 
   // Update all translatable elements
@@ -35,6 +58,36 @@ function setLanguage(lang) {
   // Re-render job listings in correct language
   renderJobs(window.__jobs || []);
 }
+
+function openDropdown() {
+  langDropdown.classList.add('open');
+  langCurrent.setAttribute('aria-expanded', 'true');
+}
+
+function closeDropdown() {
+  langDropdown.classList.remove('open');
+  langCurrent.setAttribute('aria-expanded', 'false');
+}
+
+function toggleDropdown() {
+  langDropdown.classList.contains('open') ? closeDropdown() : openDropdown();
+}
+
+// Toggle on button click
+langCurrent.addEventListener('click', (e) => {
+  e.stopPropagation();
+  toggleDropdown();
+});
+
+// Close when clicking outside
+document.addEventListener('click', (e) => {
+  if (!langDropdown.contains(e.target)) closeDropdown();
+});
+
+// Close on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeDropdown();
+});
 
 // ── Hamburger menu ─────────────────────────
 const hamburger = document.getElementById('hamburger');
@@ -111,8 +164,8 @@ async function loadJobs() {
 }
 
 // ── Modal ──────────────────────────────────
-const overlay    = document.getElementById('modal-overlay');
-const modalClose = document.getElementById('modal-close');
+const overlay      = document.getElementById('modal-overlay');
+const modalClose   = document.getElementById('modal-close');
 const modalContent = document.getElementById('modal-content');
 
 function openModal(jobId) {
@@ -138,8 +191,6 @@ function openModal(jobId) {
   overlay.classList.add('open');
   overlay.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
-
-  // Focus close button for accessibility
   modalClose.focus();
 }
 
@@ -150,18 +201,8 @@ function closeModal() {
 }
 
 modalClose.addEventListener('click', closeModal);
-overlay.addEventListener('click', e => {
-  if (e.target === overlay) closeModal();
-});
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
-
-// ── Language buttons ───────────────────────
-document.getElementById('lang-toggle').addEventListener('click', e => {
-  const btn = e.target.closest('.lang-btn');
-  if (btn) setLanguage(btn.dataset.lang);
-});
+overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // ── Init ───────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
