@@ -33,11 +33,10 @@ function renderJobs(jobs) {
   const bar = document.getElementById('jobs-bar');
   if (!bar) return;
   if (!jobs.length) {
-    bar.innerHTML = `<div class="job-row"><span class="job-title" style="opacity:0.5">${
-      currentLang === 'vi' ? 'Hiện chưa có vị trí tuyển dụng' : 'No open positions at the moment'
-    }</span></div>`;
+    bar.style.display = 'none';
     return;
   }
+  bar.style.display = '';
   bar.innerHTML = jobs.map(job => `
     <div class="job-row" onclick="openModal(${job.id})">
       <span class="job-title">
