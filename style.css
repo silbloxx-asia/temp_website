@@ -19,7 +19,7 @@
   --footer-bg:  #F0F0EE;
   --link-red:   #CC2500;
 
-  --font-heading: 'Inter', sans-serif;
+  --font-heading: 'Barlow Condensed', sans-serif;
   --font-body:    'Barlow', sans-serif;
   --font-mono:    'IBM Plex Mono', monospace;
 
@@ -351,6 +351,20 @@ address a:hover { color: var(--red); text-decoration: underline; }
   .hero { padding: var(--pad-mobile) 0; }
 }
 
+/* ── HERO VIDEO ───────────────────────────── */
+.hero-video {
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  background: var(--black);
+}
+.hero-video video {
+  width: 100%;
+  height: clamp(200px, 40vw, 560px);
+  object-fit: cover;
+  display: block;
+}
+
 /* ── SOLUTIONS ────────────────────────────── */
 .solutions {
   padding: var(--pad-section) 0;
@@ -371,8 +385,8 @@ address a:hover { color: var(--red); text-decoration: underline; }
 .solutions-content h2 {
   font-family: var(--font-heading);
   font-weight: 600;
-  font-size: clamp(1.5rem, 1.1rem + 1.7vw, 2.5rem);
-  line-height: 1.1;
+  font-size: clamp(2rem, 1.4718309859rem + 2.2535211268vw, 3.5rem);
+  line-height: 1.08;
   letter-spacing: -0.02em;
   color: var(--black);
   margin-bottom: 24px;

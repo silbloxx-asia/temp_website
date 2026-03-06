@@ -1,7 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 196">
-  <!-- Silbloxx brand mark: outer black frame, transparent inner rectangle -->
-  <!-- Proportions measured from official favicon.png (196x196) -->
-  <!-- Inner rect: x=17 y=56 w=162 h=84 -->
-  <path fill="#0D0D0D" fill-rule="evenodd"
-    d="M0 0h196v196H0zM17 56h162v84H17z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!-- Outer black rectangle -->
+  <rect x="6" y="22" width="116" height="84" rx="3" ry="3" fill="#000000"/>
+  <!-- Inner white cutout -->
+  <rect x="21" y="36" width="86" height="56" rx="1" ry="1" fill="#ffffff"/>
 </svg>
