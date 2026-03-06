@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('[data-en][data-vi]').forEach(el => {
       const text = el.dataset[lang];
-      if (text) el.textContent = text;
+      if (text) el.innerHTML = text;
     });
 
     document.documentElement.lang = lang === 'vi' ? 'vi' : 'en';
