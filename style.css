@@ -528,6 +528,7 @@ address a:hover { color: var(--red); text-decoration: underline; }
 @media (max-width: 600px) {
   .team-reasons { padding: 24px 20px; }
   .job-row { padding: 18px 20px; flex-wrap: wrap; gap: 12px; }
+  .job-row .btn-apply { display: none; }
 }
 
 /* ── FOOTER (FIX 4: grey box like SCE) ────── */
