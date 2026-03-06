@@ -39,13 +39,13 @@ function renderJobs(jobs) {
     return;
   }
   bar.innerHTML = jobs.map(job => `
-    <div class="job-row">
+    <div class="job-row" onclick="openModal(${job.id})">
       <span class="job-title">
         ${currentLang === 'vi' ? job.title_vi : job.title_en}
         <span class="job-location">(${job.location})</span>
       </span>
       <div style="display:flex;gap:10px;align-items:center">
-        <button class="btn btn-apply" onclick="openModal(${job.id})">
+        <button class="btn btn-apply" onclick="event.stopPropagation(); openModal(${job.id})">
           ${currentLang === 'vi' ? 'Chi tiết công việc' : 'Job Details'}
         </button>
       </div>
