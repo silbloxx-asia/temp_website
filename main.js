@@ -33,10 +33,19 @@ function renderJobs(jobs) {
   const bar = document.getElementById('jobs-bar');
   if (!bar) return;
   if (!jobs.length) {
-    bar.style.display = 'none';
+    bar.innerHTML = `
+      <div class="job-row">
+        <span class="job-title">
+          ${currentLang === 'vi' ? 'Hiện chưa có vị trí tuyển dụng' : 'No open positions'}
+        </span>
+        <div style="display:flex;gap:10px;align-items:center">
+          <a href="mailto:${APPLY_CC}" class="btn btn-apply">
+            ${currentLang === 'vi' ? 'Liên hệ' : 'Get in Touch'}
+          </a>
+        </div>
+      </div>`;
     return;
   }
-  bar.style.display = '';
   bar.innerHTML = jobs.map(job => `
     <div class="job-row" onclick="openModal(${job.id})">
       <span class="job-title">
